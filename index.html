@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Café Byte</title>
+  <style>
+
+/* ===== Café Byte: estilos ===== */
+
+/* Fonte Poppins, do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Paleta de cores do site */
+:root {
+  --cor-fundo: #fbf6f1;
+  --cor-texto: #3b2a20;
+  --cor-cartao: #ffffff;
+  --cor-titulo: #4b2e1f;
+  --cor-cafe: #4b2e1f;
+  --cor-destaque: #d9822b;
+  --cor-suave: #f1e3d3;
+}
+
+/* Todos os elementos: medidas mais previsíveis */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  line-height: 1.6;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--cor-titulo);
+  line-height: 1.2;
+}
+
+a {
+  color: var(--cor-destaque);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* ===== Cabeçalho e menu ===== */
+
+.topo {
+  background-color: var(--cor-cafe);
+  padding: 16px 24px;
+}
+
+.logo {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.menu a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 4px 8px;
+}
+
+.menu a:hover {
+  color: var(--cor-destaque);
+}
+
+/* Cada seção vira uma caixa branca centralizada */
+.secao {
+  max-width: 1000px;
+  margin: 32px auto;
+  padding: 32px;
+  background-color: var(--cor-cartao);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Botão */
+.botao {
+  display: inline-block;
+  background-color: var(--cor-destaque);
+  color: #ffffff;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background-color: var(--cor-cafe);
+}
+
+/* ===== Tabela de horários ===== */
+
+.horarios {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.horarios th,
+.horarios td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--cor-suave);
+}
+
+/* ===== Rodapé ===== */
+
+.rodape {
+  background-color: var(--cor-cafe);
+  color: #ffffff;
+  text-align: center;
+  padding: 24px;
+}
+
+/* ===== Layout ===== */
+
+/* Cabeçalho: logo à esquerda, menu à direita, sempre visível */
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.menu {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* Destaque: tudo centralizado */
+.destaque {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 48px 24px;
+  background: linear-gradient(135deg, var(--cor-suave), var(--cor-fundo));
+}
+
+.destaque h1 {
+  font-size: 3rem;
+  max-width: 700px;
+  margin: 8px 0 16px;
+}
+
+/* Sobre: foto e texto lado a lado */
+.duas-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Cards do cardápio: grade que se ajusta sozinha */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-suave);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card h3 {
+  margin: 8px 0;
+}
+
+.emoji {
+  font-size: 3rem;
+}
+
+.preco {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--cor-destaque);
+}
+
+/* Telas pequenas (celular): até 700px de largura */
+@media (max-width: 700px) {
+  .topo {
+    flex-wrap: wrap;
+  }
+
+  .destaque h1 {
+    font-size: 2rem;
+  }
+
+  .duas-colunas {
+    grid-template-columns: 1fr;
+  }
+
+  .secao {
+    margin: 16px;
+    padding: 20px;
+  }
+}
+
+/* ===== Saudação e aviso de aberto/fechado ===== */
+
+.saudacao {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--cor-destaque);
+  margin: 0;
+}
+
+.status {
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 999px;
+}
+
+.aberto-agora {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.fechado-agora {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* ===== Modo escuro e menu do celular ===== */
+
+/* No modo escuro, só trocamos os valores das variáveis */
+body.escuro {
+  --cor-fundo: #1c1512;
+  --cor-texto: #f3e9e2;
+  --cor-cartao: #2a210b;
+  --cor-titulo: #f2b56b;
+  --cor-suave: #3d2f27;
+}
+
+body {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.botao-tema,
+.botao-menu {
+  background: none;
+  border: 2px solid var(--cor-destaque);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1.2rem;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+/* O botão de menu fica escondido no computador */
+.botao-menu {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .botao-menu {
+    display: block;
+  }
+
+  .botao-tema {
+    margin-left: auto;
+  }
+
+  /* No celular, o menu fica escondido até clicar no botão */
+  .menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    order: 3;
+  }
+
+  .menu.mostrar {
+    display: flex;
+  }
+}
+
+/* ===== Busca e filtros do cardápio ===== */
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.busca {
+  flex: 1 1 220px;
+  padding: 10px 16px;
+  border: 2px solid var(--cor-suave);
+  border-radius: 999px;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.filtro {
+  padding: 8px 16px;
+  border: 2px solid var(--cor-destaque);
+  border-radius: 999px;
+  background: none;
+  color: var(--cor-texto);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.filtro.ativo {
+  background-color: var(--cor-destaque);
+  color: #ffffff;
+}
+
+/* ===== Meu pedido ===== */
+
+.itens-pedido {
+  list-style: none;
+  padding: 0;
+}
+
+.itens-pedido li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--cor-suave);
+}
+
+.itens-pedido li span:first-child {
+  flex: 1;
+}
+
+.remover {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--cor-destaque);
+  border-radius: 50%;
+  background: none;
+  color: var(--cor-texto);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.total {
+  font-size: 1.3rem;
+  text-align: right;
+}
+
+/* ===== Formulário de entrega ===== */
+
+.form {
+  display: grid;
+  gap: 8px;
+  max-width: 480px;
+}
+
+.form input {
+  padding: 10px 14px;
+  border: 2px solid var(--cor-suave);
+  border-radius: 8px;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: var(--cor-destaque);
+}
+
+.form .botao {
+  margin-top: 12px;
+  justify-self: start;
+}
+
+.mensagem {
+  font-weight: 600;
+  color: var(--cor-destaque);
+}
+
+/* ===== Clima e mapa ===== */
+
+.clima {
+  margin: 0 0 20px;
+  padding: 8px 20px;
+  background-color: var(--cor-cartao);
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.mapa {
+  width: 100%;
+  height: 300px;
+  border: 0;
+  border-radius: 12px;
+}
+
+/* ===== Acabamento ===== */
+
+/* Rolagem suave ao clicar nos links do menu */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ao pular para uma seção, deixa espaço para o cabeçalho fixo */
+section {
+  scroll-margin-top: 80px;
+}
+
+/* Contorno bem visível para quem navega pelo teclado (Tab) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+/* Cor do texto quando selecionado com o mouse */
+::selection {
+  background-color: var(--cor-destaque);
+  color: #ffffff;
+}
+  </style>
+</head>
+<body>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Café Byte</title>
+
+  <meta name="description" content="Café Byte: cafeteria com cafés especiais, bolos caseiros, espaço para estudar, trabalhar e realizar pedidos online.">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%95%3C/text%3E%3C/svg%3E">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Café Byte: projeto do curso Web do Zero -->
+
+  <header class="topo">
+
+    <a href="#inicio" class="logo">☕ Café Byte</a>
+
+    <nav id="menu" class="menu">
+      <a href="#sobre">Sobre</a>
+      <a href="#cardapio">Cardápio</a>
+      <a href="#pedido">Pedido</a>
+      <a href="#contato">Contatos</a>
+    </nav>
+
+    <button id="botao-tema" class="botao-tema" aria-label="Mudar tema">🌙</button>
+
+    <button id="botao-menu" class="botao-menu" aria-label="Abrir menu">☰</button>
+
+  </header>
+
+  <main>
+
+    <section id="inicio" class="destaque">
+
+      <p id="saudacao" class="saudacao">Olá! Que bom ter você por aqui.</p>
+
+      <h1>Café quentinho, código fresquinho.</h1>
+
+      <p>Cafés especiais, bolos caseiros e um cantinho com Wi-Fi para estudar.</p>
+
+      <p id="status" class="status"></p>
+
+      <div id="clima" class="clima">⌛ Consultando o clima...</div>
+
+      <a href="#cardapio" class="botao">Ver cardápio</a>
+
+    </section>
+
+
+    <section id="sobre" class="secao">
+
+      <h2>Sobre nós</h2>
+
+      <div class="duas-colunas">
+
+        <img
+          src="https://a-static.mlcdn.com.br/420x420/jogo-10-xicara-de-cafe-de-vidro-90ml-basica-brasilia-em-casa-tem-emcasatem/lemisks/127041-10/3db04c3f8d1625fa867f8e4246052b7a.jpeg"
+          alt="Xícara de café com pires e colher"
+          width="500"
+        >
+
+        <div>
+
+          <p>O <strong>Café Byte</strong> nasceu da fusão perfeita entre a paixão pelo café artesanal e o universo da inovação tecnológica, criando um espaço físico único projetado especialmente para programadores, criadores de conteúdo, gamers e mentes digitais. Localizada no coração do polo de inovação urbana, a cafeteria funciona como um verdadeiro hub de produtividade e conexões humanas, combinando grãos especiais de origem controlada com uma infraestrutura de ponta que oferece bancadas ergonômicas, tomadas inteligentes e internet de ultravelocidade. Seja para focar em uma longa jornada de linhas de código com um clássico espresso, fazer um brainstorming de equipe acompanhado de doces finos ou simplesmente pausar as telas para recarregar as energias, o Café Byte é o ecossistema ideal onde grandes ideias são processadas e o combustível para o futuro é servido em cada xícara.</p>
+
+          <ul>
+            <li>Grãos de pequenos produtores</li>
+            <li>Bolos feitos todo dia de manhã</li>
+            <li>Wi-Fi e tomada em todas as mesas</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+      <h3>Horário de funcionamento</h3>
+
+      <table class="horarios">
+
+        <tr>
+          <th>Dia</th>
+          <th>Horário</th>
+        </tr>
+
+        <tr>
+          <td>Segunda a Sexta</td>
+          <td>7h às 20h</td>
+        </tr>
+
+        <tr>
+          <td>Sábado</td>
+          <td>8h às 18h</td>
+        </tr>
+
+        <tr>
+          <td>Domingo</td>
+          <td>Fechado</td>
+        </tr>
+
+      </table>
+
+    </section>
+
+
+    <section id="cardapio" class="secao">
+
+      <h2>Cardápio</h2>
+
+      <p>Escolha uma categoria ou procure pelo nome:</p>
+
+      <div class="filtros">
+
+        <input
+          type="search"
+          id="busca"
+          class="busca"
+          placeholder="🔍 Buscar no cardápio..."
+        >
+
+        <button class="filtro ativo" data-categoria="todos">Todos</button>
+
+        <button class="filtro" data-categoria="bebida">Bebidas</button>
+
+        <button class="filtro" data-categoria="doce">Doces</button>
+
+        <button class="filtro" data-categoria="salgado">Salgados</button>
+
+      </div>
+
+      <div id="lista-produtos" class="cards"></div>
+
+    </section>
+
+
+    <section id="pedido" class="secao">
+
+      <h2>Meu pedido</h2>
+
+      <ul id="itens-pedido" class="itens-pedido"></ul>
+
+      <p class="total">
+        Total: <strong id="total">R$ 0,00</strong>
+      </p>
+
+      <h3>Entrega</h3>
+
+      <form id="form-entrega" class="form">
+
+        <label for="cep">CEP</label>
+
+        <input
+          id="cep"
+          placeholder="00000-000"
+          maxlength="9"
+          required
+        >
+
+        <p id="msg-cep" class="mensagem"></p>
+
+        <label for="endereco">Endereço</label>
+
+        <input
+          id="endereco"
+          placeholder="Rua, bairro e cidade"
+          required
+        >
+
+        <label for="numero">Número</label>
+
+        <input
+          id="numero"
+          placeholder="Ex.: 123"
+          required
+        >
+
+        <button type="submit" class="botao">Finalizar pedido</button>
+
+      </form>
+
+      <p id="msg-pedido" class="mensagem"></p>
+
+    </section>
+
+
+    <section id="contato" class="secao">
+
+      <h2>Contato</h2>
+
+      <p>📍 Rua das Flores, 123, Centro</p>
+
+      <p>
+        📞 <a href="tel:+5511999999999">(11) 99999-9999</a>
+      </p>
+
+      <p>
+        ✉️ <a href="mailto:contato@cafebyte.com.br">contato@cafebyte.com.br</a>
+      </p>
+
+      <p>
+        📷 <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Siga a gente no Instagram</a>
+      </p>
+
+      <iframe
+        class="mapa"
+        title="Mapa do Café Byte"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-46.640%2C-23.556%2C-46.626%2C-23.545&amp;layer=mapnik&amp;marker=-23.5505%2C-46.6333"
+        loading="lazy"
+      ></iframe>
+
+    </section>
+
+  </main>
+
+
+  <footer class="rodape">
+
+    <p>&copy; <span id="ano">2026</span> Café Byte - Feito por GABRIEL TOBIAS RAMOS DUQUE no curso Web do Zero</p>
+
+    <a href="#inicio">Voltar ao topo &uarr;</a>
+
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
+
+<script>
+
+ // ===== Café Byte: script =====
+
+ // ----- Saudação e "aberto agora" -----
+ console.log('O script do Café Byte foi carregado!');
+
+ const agora = new Date();
+ const hora = agora.getHours();
+ const diaDaSemana = agora.getDay();
+
+ console.log('Agora são ' + hora + ' horas. Dia da semana: ' + diaDaSemana);
+
+ function saudacao(h) {
+   if (h < 12) {
+     return 'Bom dia! ☀️';
+   } else if (h < 18) {
+     return 'Boa tarde! ⛅';
+   } else {
+     return 'Boa noite! 🌙';
+   }
+ }
+
+ document.querySelector('#saudacao').textContent = saudacao(hora);
+
+ function estaAberto(dia, h) {
+   if (dia === 0) {
+     return false; // domingo: fechado
+   } else if (dia === 6) {
+     return h >= 8 && h < 18; // sábado: 8h às 18h
+   } else {
+     return h >= 7 && h < 20; // segunda a sexta: 7h às 20h
+   }
+ }
+
+ const avisoStatus = document.querySelector('#status');
+
+ if (estaAberto(diaDaSemana, hora)) {
+   avisoStatus.textContent = '🟢 Estamos abertos agora!';
+   avisoStatus.classList.add('aberto-agora');
+ } else {
+   avisoStatus.textContent = '🔴 Estamos fechados agora. Volte mais tarde!';
+   avisoStatus.classList.add('fechado-agora');
+ }
+
+
+ // ----- Modo escuro -----
+
+ const botaoTema = document.querySelector('#botao-tema');
+
+ function atualizarIconeTema() {
+   if (document.body.classList.contains('escuro')) {
+     botaoTema.textContent = '☀️';
+   } else {
+     botaoTema.textContent = '🌙';
+   }
+ }
+
+ botaoTema.addEventListener('click', function () {
+   document.body.classList.toggle('escuro');
+   atualizarIconeTema();
+
+   localStorage.setItem(
+     'cafebyte-tema',
+     document.body.classList.contains('escuro')
+   );
+ });
+
+
+ // ----- Menu do celular -----
+
+ const botaoMenu = document.querySelector('#botao-menu');
+ const menu = document.querySelector('#menu');
+
+ botaoMenu.addEventListener('click', function () {
+   menu.classList.toggle('mostrar');
+ });
+
+ // Clicou em um link do menu? Fecha o menu.
+ menu.addEventListener('click', function () {
+   menu.classList.remove('mostrar');
+ });
+
+
+ // ----- Cardápio: os dados -----
+
+ const produtos = [
+   {
+     id: 1,
+     nome: 'Café expresso',
+     categoria: 'bebida',
+     preco: 6.5,
+     emoji: '☕',
+     descricao: 'Curto, encorpado e cheiroso.'
+   },
+   {
+     id: 2,
+     nome: 'Cappuccino',
+     categoria: 'bebida',
+     preco: 9.9,
+     emoji: '🥛',
+     descricao: 'Café, leite vaporizado e canela.'
+   },
+   {
+     id: 3,
+     nome: 'Chocolate quente',
+     categoria: 'bebida',
+     preco: 11,
+     emoji: '🥤',
+     descricao: 'Cremoso, perfeito para dias frios.'
+   },
+   {
+     id: 4,
+     nome: 'Suco de laranja',
+     categoria: 'bebida',
+     preco: 8,
+     emoji: '🍊',
+     descricao: 'Natural e geladinho.'
+   },
+   {
+     id: 5,
+     nome: 'Bolo de cenoura',
+     categoria: 'doce',
+     preco: 8.5,
+     emoji: '🍰',
+     descricao: 'Com cobertura de chocolate.'
+   },
+   {
+     id: 6,
+     nome: 'Cookie',
+     categoria: 'doce',
+     preco: 6,
+     emoji: '🍪',
+     descricao: 'Gotas de chocolate e casquinha crocante.'
+   },
+   {
+     id: 7,
+     nome: 'Pão de queijo',
+     categoria: 'salgado',
+     preco: 5,
+     emoji: '🧀',
+     descricao: 'Quentinho, saído do forno.'
+   },
+   {
+     id: 8,
+     nome: 'Misto quente',
+     categoria: 'salgado',
+     preco: 12,
+     emoji: '🥪',
+     descricao: 'Pão de forma, queijo e presunto.'
+   }
+ ];
+
+ console.log('Produtos no cardápio: ' + produtos.length);
+
+
+ // ----- Cardápio: mostrar na página -----
+
+ const listaProdutos = document.querySelector('#lista-produtos');
+ const busca = document.querySelector('#busca');
+ const filtros = document.querySelectorAll('.filtro');
+
+ let categoriaAtual = 'todos';
+
+ function formatarPreco(valor) {
+   return 'R$ ' + valor.toFixed(2).replace('.', ',');
+ }
+
+ function mostrarProdutos() {
+   const texto = busca.value.toLowerCase();
+   let encontrados = 0;
+
+   listaProdutos.innerHTML = '';
+
+   produtos.forEach(function (produto) {
+     const daCategoria =
+       categoriaAtual === 'todos' ||
+       produto.categoria === categoriaAtual;
+
+     const combinaBusca =
+       produto.nome.toLowerCase().includes(texto);
+
+     if (daCategoria && combinaBusca) {
+       const card = document.createElement('article');
+
+       card.className = 'card';
+
+       card.innerHTML = `
+         <span class="emoji">${produto.emoji}</span>
+         <h3>${produto.nome}</h3>
+         <p>${produto.descricao}</p>
+         <p class="preco">${formatarPreco(produto.preco)}</p>
+         <button class="botao" data-id="${produto.id}">Adicionar</button>
+       `;
+
+       listaProdutos.appendChild(card);
+
+       encontrados = encontrados + 1;
+     }
+   });
+
+   if (encontrados === 0) {
+     listaProdutos.innerHTML =
+       '<p>Nenhum produto encontrado. 😕</p>';
+   }
+ }
+
+ mostrarProdutos();
+
+
+ // Digitou na busca? Mostra de novo, já filtrando.
+
+ busca.addEventListener('input', mostrarProdutos);
+
+
+ // Clicou em um filtro? Troca a categoria e marca o botão.
+
+ filtros.forEach(function (botao) {
+   botao.addEventListener('click', function () {
+     filtros.forEach(function (outro) {
+       outro.classList.remove('ativo');
+     });
+
+     botao.classList.add('ativo');
+
+     categoriaAtual = botao.dataset.categoria;
+
+     mostrarProdutos();
+   });
+ });
+
+
+ // ----- Meu pedido: salvo no navegador -----
+
+ const itensPedido = document.querySelector('#itens-pedido');
+ const totalPedido = document.querySelector('#total');
+
+ // Lê o pedido salvo. Se ainda não existir, começa com lista vazia.
+ let pedido = JSON.parse(localStorage.getItem('cafebyte-pedido')) || [];
+
+ function salvarPedido() {
+   localStorage.setItem('cafebyte-pedido', JSON.stringify(pedido));
+ }
+
+ function mostrarPedido() {
+   itensPedido.innerHTML = '';
+
+   let total = 0;
+
+   if (pedido.length === 0) {
+     itensPedido.innerHTML =
+       '<li>Seu pedido está vazio. Escolha algo no cardápio!</li>';
+   }
+
+   pedido.forEach(function (item, posicao) {
+     const subtotal = item.preco * item.quantidade;
+
+     total = total + subtotal;
+
+     const li = document.createElement('li');
+
+     li.innerHTML = `
+       <span>${item.quantidade} x ${item.nome}</span>
+       <span>${formatarPreco(subtotal)}</span>
+       <button class="remover" data-posicao="${posicao}" aria-label="Tirar um">-</button>
+     `;
+
+     itensPedido.appendChild(li);
+   });
+
+   totalPedido.textContent = formatarPreco(total);
+ }
+
+ mostrarPedido();
+
+
+ // ----- Adicionar produtos ao pedido -----
+
+ function adicionarAoPedido(id) {
+   const produto = produtos.find(function (p) {
+     return p.id === id;
+   });
+
+   if (!produto) {
+     return;
+   }
+
+   const itemExistente = pedido.find(function (item) {
+     return item.id === id;
+   });
+
+   if (itemExistente) {
+     itemExistente.quantidade =
+       itemExistente.quantidade + 1;
+   } else {
+     pedido.push({
+       id: produto.id,
+       nome: produto.nome,
+       preco: produto.preco,
+       quantidade: 1
+     });
+   }
+
+   salvarPedido();
+   mostrarPedido();
+ }
+
+
+ // Um só "escutador" para todos os botões Adicionar.
+
+ listaProdutos.addEventListener('click', function (evento) {
+   const botao = evento.target.closest('button[data-id]');
+
+   if (botao) {
+     const id = botao.dataset.id;
+
+     adicionarAoPedido(Number(id));
+   }
+ });
+
+
+ // ----- Tirar itens do pedido -----
+
+ // Botão "-": tira uma unidade.
+ // Quando a quantidade chega a zero, remove o item todo.
+
+ itensPedido.addEventListener('click', function (evento) {
+   const botao = evento.target.closest('button[data-posicao]');
+
+   if (botao) {
+     const posicao = Number(botao.dataset.posicao);
+
+     const item = pedido[posicao];
+
+     if (!item) {
+       return;
+     }
+
+     item.quantidade = item.quantidade - 1;
+
+     if (item.quantidade === 0) {
+       pedido.splice(posicao, 1);
+     }
+
+     salvarPedido();
+     mostrarPedido();
+   }
+ });
+
+
+ // ----- Finalizar o pedido -----
+
+ const formEntrega = document.querySelector('#form-entrega');
+ const msgPedido = document.querySelector('#msg-pedido');
+
+ formEntrega.addEventListener('submit', function (evento) {
+   evento.preventDefault(); // Não deixa a página recarregar.
+
+   if (pedido.length === 0) {
+     msgPedido.textContent =
+       'Seu pedido está vazio. Escolha algo no cardápio!';
+     return;
+   }
+
+   const endereco = document.querySelector('#endereco').value;
+   const numero = document.querySelector('#numero').value;
+
+   msgPedido.textContent =
+     `✅ Pedido recebido! Total: ${totalPedido.textContent}. Vamos entregar em ${endereco}, nº ${numero}.`;
+
+   pedido = [];
+
+   salvarPedido();
+   mostrarPedido();
+
+   formEntrega.reset();
+ });
+
+
+ // ----- Lembra o tema escolhido na última visita -----
+
+ if (localStorage.getItem('cafebyte-tema') === 'true') {
+   document.body.classList.add('escuro');
+ }
+
+ atualizarIconeTema();
+
+
+ // ----- API 1: clima agora (Open-Meteo) -----
+
+ // Coordenadas de São Paulo.
+ // Troque pelas coordenadas da sua cidade.
+
+ const LATITUDE = -23.55;
+ const LONGITUDE = -46.63;
+
+ const caixaClima = document.querySelector('#clima');
+
+ async function carregarClima() {
+   const url = 'https://api.open-meteo.com/v1/forecast'
+     + `?latitude=LATITUDE&longitude={LONGITUDE}`
+     + '&current=temperature_2m';
+
+   try {
+     const resposta = await fetch(url);
+
+     if (!resposta.ok) {
+       throw new Error('Erro na consulta do clima');
+     }
+
+     const dados = await resposta.json();
+
+     const temperatura = Math.round(
+       dados.current.temperature_2m
+     );
+
+     let sugestao = '';
+
+     if (temperatura < 20) {
+       sugestao = 'Friozinho! Que tal um chocolate quente? 🍫';
+     } else if (temperatura < 27) {
+       sugestao = 'Clima perfeito para um cappuccino. ☕';
+     } else {
+       sugestao = 'Calorão! Um suco de laranja geladinho cai bem. 🍊';
+     }
+
+     caixaClima.textContent =
+       `🌡️ Agora faz ${temperatura}°C por aqui. ${sugestao}`;
+
+   } catch (erro) {
+     caixaClima.textContent =
+       'Não foi possível consultar o clima agora.';
+
+     console.log(erro);
+   }
+ }
+
+ carregarClima();
+
+
+ // ----- API 2: endereço pelo CEP (ViaCEP) -----
+
+ const campoCep = document.querySelector('#cep');
+ const campoEndereco = document.querySelector('#endereco');
+ const msgCep = document.querySelector('#msg-cep');
+
+ async function buscarCep() {
+   const cep = campoCep.value.replace(/\D/g, '').trim();
+
+   if (cep.length !== 8) {
+     msgCep.textContent = 'O CEP precisa ter 8 números.';
+     return;
+   }
+
+   msgCep.textContent = '⌛ Procurando o endereço...';
+
+   try {
+     const resposta = await fetch(
+       `https://viacep.com.br/ws/${cep}/json/`
+     );
+
+     if (!resposta.ok) {
+       throw new Error('Erro na consulta do CEP');
+     }
+
+     const dados = await resposta.json();
+
+     if (dados.erro) {
+       msgCep.textContent =
+         'CEP não encontrado. Confira os números.';
+       return;
+     }
+
+     campoEndereco.value =
+       `${dados.logradouro}, ${dados.bairro}, ${dados.localidade} - ${dados.uf}`;
+
+     msgCep.textContent =
+       '📍 Endereço encontrado! Agora digite o número.';
+
+     document.querySelector('#numero').focus();
+
+   } catch (erro) {
+     msgCep.textContent =
+       'Não foi possível consultar o CEP. Verifique a internet.';
+
+     console.log(erro);
+   }
+ }
+
+ // Quando a pessoa termina de digitar o CEP e sai do campo.
+ campoCep.addEventListener('change', buscarCep);
+
+
+ // ----- Rodapé: ano sempre atualizado -----
+
+ document.querySelector('#ano').textContent =
+   new Date().getFullYear();
+</script>
+</body>
+</html>
